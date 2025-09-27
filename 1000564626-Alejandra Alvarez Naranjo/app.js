@@ -20,41 +20,68 @@ const registrarGasto = (montoGasto) => {
         console.log(`Saldo restante: $${saldo}`);
         console.log(`Gastos totales: $${gastosTotales}`);
     } else {
-        console.log(" Fondos insuficientes");
+        console.log("Fondos insuficientes");
     }
 };
+
 const simularSemana = () => {
-
-
-    for (let dia = 1; dia < 8; dia++) {
-        console.log(`Día ${dia}:`);
+    for (let dia = 1; dia <= 7; dia++) {
+        console.log(` Día ${dia}:`);
         registrarGasto(50);
     }
 };
-simularSemana();
 
-
-function diagnosticoFinanciero() {
-    if (gastosTotales > 300) {
-        console.log("Tu salud financiera es excelente.");
-    } else {
-        console.log("Alerta: Revisa tus gastos, podrías estar gastando demasiado.");
-    }
-}
 function diagnosticoFinanciero() {
     switch (true) {
         case gastosTotales > 300:
-            console.log("excedes los gastos");
+            console.log(" Excedes los gastos.");
             break;
         case gastosTotales > 150:
-            console.log("gasta moderadamente");
+            console.log(" Gasta moderadamente.");
             break;
         default:
-            console.log("has sido muy prudente con tus gastos");
+            console.log(" Has sido muy prudente con tus gastos.");
             break;
     }
 }
 
+function iniciarApp() {
+    while (true) {
+        let opcion = prompt(
+`Seleccione una opción:
+1. Registrar un ingreso
+2. Registrar gasto
+3. Simular una semana de gastos
+4. Ver diagnóstico financiero
+5. Mostrar balance actual
+6. Salir`
+        );
 
+        switch (opcion) {
+            case "1":
+                let montoIngreso = parseFloat(prompt("Ingrese el monto del ingreso:"));
+                registrarIngreso(montoIngreso);
+                break;
+            case "2":
+                let montoGasto = parseFloat(prompt("Ingrese el monto del gasto:"));
+                registrarGasto(montoGasto);
+                break;
+            case "3":
+                simularSemana();
+                break;
+            case "4":
+                diagnosticoFinanciero();
+                break;
+            case "5":
+                mostrarBalance();
+                break;
+            case "6":
+                console.log("👋 Gracias por usar tu banca en línea. ¡Hasta pronto!");
+                return;
+            default:
+                console.log("Opción no válida. Intente nuevamente.");
+        }
+    }
+}
 
-
+iniciarApp();
